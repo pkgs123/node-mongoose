@@ -18,12 +18,28 @@ connect.then((db) => {
         .then((dish) => {
             console.log(dish);
 
-            return Dishes.find({}).exec();
-        })
-        .then((dishes) => {
-            console.log(dishes);
+            return Dishes.findByIdAndUpdate(dish._id,{
+                $set:{description:'Updted test'},
+            },
+                {
+                    new:true
 
-            return Dishes.remove({});
+            }).exec();
+        })
+        .then((dish) => {
+            console.log(dish);
+            dish.comment.push({
+                rating: 5,
+                comment: `I'm getting a sinking feeling!`,
+                author:'Leonardo di Carpaccio'
+            });
+
+            return dish.save();
+            
+        })
+        .then((dish)=>{
+            console.log(dish);
+           // return Dishes.remove({});
         })
         .then(() => {
             return mongoose.connection.close();
