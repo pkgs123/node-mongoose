@@ -17,11 +17,26 @@ connect.then((db)=>{
     //Employee.save()
     .then((data) =>{
         console.log(`Data ${data}`);
-        return Employees.find({}).exec();
+        return Employees.findByIdAndUpdate(data._id,{
+            $set:{name:'Prashant Singh'},
+        },{new:true
+        }).exec();
     })
     .then((emprecords) =>{
         console.log(emprecords);
-        return Employees.remove({});
+        
+        emprecords.experienceDetails.push({
+            companyName:'Reliance Jio Platforms Ltd.',
+            totalYearOfExp:6,
+            RelevantYearOfExp:2.5,
+            Designation:'Assistant Manager | Application Developer'
+        });
+        return emprecords.save();
+       // return Employees.remove({});
+    })
+    .then((data) =>{
+        console.log(data);
+        // return Employees.remove({});
     })
     .then(()=>{
         return mongoose.connection.close();

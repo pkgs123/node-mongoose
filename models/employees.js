@@ -1,6 +1,29 @@
 let mongoose = require('mongoose');
 let schema = mongoose.Schema;
 
+const EmpExp = new schema({
+        companyName:{
+            type:String,
+            required:true
+        },
+        Designation:{
+            type:String,
+            requried:true
+        },
+        totalYearOfExp:{
+            type:Number,
+            required:true
+        },
+        RelevantYearOfExp:{
+                type:Number,
+                required:true
+        }
+    },
+    {timestamps:true
+
+});
+
+
 const employeePersonalInfoaSchema = new schema({
     name:{
         type:String,
@@ -13,7 +36,12 @@ const employeePersonalInfoaSchema = new schema({
     Address:{
         type:String,
         required:true
-    }
+    },
+    experienceDetails:[EmpExp]
+    
+},
+    {
+        timestamps:true
 })
 
 let Employees = mongoose.model('Employee',employeePersonalInfoaSchema);

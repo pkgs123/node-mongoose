@@ -28,6 +28,7 @@ connect.then((db) => {
         })
         .then((dish) => {
             console.log(dish);
+        
             dish.comment.push({
                 rating: 5,
                 comment: `I'm getting a sinking feeling!`,
